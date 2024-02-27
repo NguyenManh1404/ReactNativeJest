@@ -1,118 +1,126 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
+  TouchableOpacity,
 } from 'react-native';
+import React, {useState} from 'react';
+import SocialButton from './src/components/SocialButton';
+import CustomTextInput from './src/components/CustomTextInput';
+import AuthTitle from './src/components/AuthTitle';
+import {loginWithEmail} from './src/api/auth';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = props => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  const handleLogin = () => {
+    const data = {
+      email: email,
+      password: password,
+    };
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+    const {testLogin} = props;
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+    if (testLogin) {
+      testLogin(data);
+    }
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    loginWithEmail(data);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <AuthTitle />
+      <View style={styles.inputContainer}>
+        <CustomTextInput
+          testID="email"
+          title="Email"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          secureTextEntry={false}
+        />
+
+        <CustomTextInput
+          testID="password"
+          title="Password"
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={setPassword}
+          keyboardType="default"
+          secureTextEntry={true}
+        />
+      </View>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={handleLogin}
+        testID="btnLogin">
+        <Text style={styles.loginButtonText}>Login</Text>
+      </TouchableOpacity>
+      <View style={styles.viewSocial}>
+        <SocialButton
+          type="twitter"
+          label="Twitter"
+          link="https://twitter.com/"
+        />
+        <SocialButton
+          type="instagram"
+          label="Instagram"
+          link="https://www.instagram.com/"
+        />
+      </View>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  inputContainer: {
+    width: '80%',
+    marginBottom: 20,
+  },
+  inputTitle: {
+    marginBottom: 5,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  input: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+  },
+  loginButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  viewSocial: {
+    flexDirection: 'row',
+    width: '60%',
+    marginTop: 20,
+  },
+});
