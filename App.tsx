@@ -1,78 +1,58 @@
+import {SafeAreaView, StyleSheet} from 'react-native';
+import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import React, {useState} from 'react';
-import SocialButton from './src/components/SocialButton';
-import CustomTextInput from './src/components/CustomTextInput';
-import AuthTitle from './src/components/AuthTitle';
-import {loginWithEmail} from './src/api/auth';
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import {setContext} from '@apollo/client/link/context';
 
-const App = props => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import ListTransportation from './src/components/ListTransportation';
+//import AddLink from './src/components/AddLink';
 
-  const handleLogin = () => {
-    const data = {
-      email: email,
-      password: password,
+// Initialize Apollo Client
+//https://medium.com/simform-engineering/apollo-graphql-with-react-native-part-1-29ec126d8c58
+// const client = new ApolloClient({
+//   // uri: 'http://localhost:4000/graphql',
+//   uri: 'https://api-uat.pikthat.com/driver/graphql',
+//   cache: new InMemoryCache(),
+//   credentials: 'same-origin',
+//   request: setCredentials,
+// });
+
+const App = () => {
+  const httpLink = createHttpLink({
+    uri: 'https://api-uat.pikthat.com/driver/graphql',
+    // uri: 'http://localhost:4000/graphql',
+    // credentials: 'same-origin',
+  });
+
+  const authLink = setContext((_, {headers}) => {
+    const token =
+      'eyJraWQiOiJ3dzZsUjJWdlN1VnhTMkJ6a2VzN3V0WVc3R1ZBMWc1Y2lzbHJiODM1YUJvPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5YTU2Njg2Ni1iZmIyLTQ4ZjAtYjMwZS04NWQ1ZGRhYTI0MWMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLmNhLWNlbnRyYWwtMS5hbWF6b25hd3MuY29tXC9jYS1jZW50cmFsLTFfZzFFZEU2SWJnIiwicGhvbmVfbnVtYmVyX3ZlcmlmaWVkIjpmYWxzZSwiY29nbml0bzp1c2VybmFtZSI6IjlhNTY2ODY2LWJmYjItNDhmMC1iMzBlLTg1ZDVkZGFhMjQxYyIsIm9yaWdpbl9qdGkiOiI3OGQ4YTAyYi0yYzQxLTQzNzctOWRmYi1lMjAyZTVjOGIzMTEiLCJjdXN0b206dXNlclR5cGUiOiJEcml2ZXIiLCJhdWQiOiIydWU4OGVwazNmZHFtazA2MzFrcjdjZDFpcyIsImV2ZW50X2lkIjoiNzQxZDRlYjUtZmFjZS00ZTc3LWFiOGYtY2VjYWYyMjU3N2QxIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MDkxMDM1OTIsInBob25lX251bWJlciI6IisxODY1Njc1MjMyIiwiZXhwIjoxNzA5MTc5Nzk1LCJpYXQiOjE3MDkxNzYxOTUsImp0aSI6ImYzMzBhMTdlLTExNzctNGIxYi05MmUyLTUwOTk1MjY2ODU1OSIsImVtYWlsIjoiZHJpdmVyXzFfQGdtYWlsLmNvbSJ9.NHR7VnYQDPZjBZxwg3PCZhLyuUPZ5TPmbG-ey5nqkzLW2Un95oNEyRenZcwjFO9DdyOmT7kJCbzcVwFE7kV-qG3SXRkg0wUTIZ2RIP73q9J3JJVfcj7idmz3jPO7PKuB3ohflCxbguSGBy00_OOoG2DsUzdHNlAYORjXNw4RecuKoK30WipPg-COfx7pRD8D6zphnzfra_i0D7sTcEmh9WDC5S5anj63k6rKkZxsswLOW2CdZp4XU07hblqJRa-EaNuPNcNo5OyMEJK6wYJw60vLoSXjAzWhej1-dKaYJ1lYaLGDZeVUNmU6d4--jQr925vbhGIborjhvOOirW2zfw';
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token}`,
+        platform: 'IOS',
+        appname: 'DRIVER',
+      },
     };
+  });
 
-    const {testLogin} = props;
-
-    if (testLogin) {
-      testLogin(data);
-    }
-
-    loginWithEmail(data);
-  };
-
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    //uri: 'http://localhost:4000/graphql',
+    cache: new InMemoryCache(),
+  });
   return (
-    <SafeAreaView style={styles.container}>
-      <AuthTitle />
-      <View style={styles.inputContainer}>
-        <CustomTextInput
-          testID="email"
-          title="Email"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          secureTextEntry={false}
-        />
-
-        <CustomTextInput
-          testID="password"
-          title="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          keyboardType="default"
-          secureTextEntry={true}
-        />
-      </View>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={handleLogin}
-        testID="btnLogin">
-        <Text style={styles.loginButtonText}>Login</Text>
-      </TouchableOpacity>
-      <View style={styles.viewSocial}>
-        <SocialButton
-          type="twitter"
-          label="Twitter"
-          link="https://twitter.com/"
-        />
-        <SocialButton
-          type="instagram"
-          label="Instagram"
-          link="https://www.instagram.com/"
-        />
-      </View>
-    </SafeAreaView>
+    <ApolloProvider client={client}>
+      <SafeAreaView style={styles.container}>
+        {/* <AddLink /> */}
+        <ListTransportation />
+      </SafeAreaView>
+    </ApolloProvider>
   );
 };
 
@@ -106,17 +86,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 15,
     marginBottom: 15,
-  },
-  loginButton: {
-    backgroundColor: '#007bff',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-  },
-  loginButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
   viewSocial: {
     flexDirection: 'row',

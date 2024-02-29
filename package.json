@@ -7,11 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "graphql": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "dependencies": {
+    "@apollo/client": "^3.9.5",
     "@testing-library/jest-native": "^5.4.3",
     "axios": "^1.6.7",
+    "graphql": "^16.8.1",
     "react": "18.2.0",
     "react-native": "0.73.4"
   },

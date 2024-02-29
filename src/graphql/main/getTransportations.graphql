@@ -1,0 +1,31 @@
+query getTransportations(
+  $page: Float
+  $limit: Float
+  $orderBy: String
+  $filters: [FilterDto!]
+  $q: String
+) {
+  getTransportations(
+    queryParams: {
+      page: $page
+      limit: $limit
+      orderBy: $orderBy
+      filters: $filters
+      q: $q
+    }
+  ) {
+    meta {
+      totalItems
+      itemCount
+      currentPage
+      totalPages
+      itemsPerPage
+    }
+    items {
+      id
+      name
+      description
+      logoUrl
+    }
+  }
+}
