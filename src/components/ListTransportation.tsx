@@ -91,7 +91,6 @@ const ListTransportation = () => {
     setOnRefresh(false);
   }, 2000);
 
-
   return (
     <View style={styles.container}>
       <FlatList

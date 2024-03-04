@@ -1,22 +1,21 @@
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import {gql, useMutation} from '@apollo/client';
-import useConnectionQuery from '../hooks/useConnectionQuery';
 
-const ADD_LINK = gql`
-  mutation ($url: String!, $description: String!) {
-    post(url: $url, description: $description) {
-      id
-      description
-    }
-  }
-`;
+// const ADD_LINK = gql`
+//   mutation ($url: String!, $description: String!) {
+//     post(url: $url, description: $description) {
+//       id
+//       description
+//     }
+//   }
+// `;
 
 const AddLink = () => {
   const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
 
-  const [addLink, {data, loading, error}] = useMutation(ADD_LINK);
+  // const [addLink, {data, loading, error}] = useMutation(ADD_LINK);
 
   console.log('🚀 ~ AddLink ~ data:', data);
   return (

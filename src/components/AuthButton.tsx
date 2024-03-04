@@ -3,20 +3,20 @@ import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 const AuthButton = ({onPress, label, testID}) => {
-  const GET_FEED = gql`
-    query getFeed {
-      feed {
-        id
-        links {
-          id
-          description
-        }
-      }
-    }
-  `;
+  // const GET_FEED = gql`
+  //   query getFeed {
+  //     feed {
+  //       id
+  //       links {
+  //         id
+  //         description
+  //       }
+  //     }
+  //   }
+  // `;
 
-  const {loading, error, data} = useQuery(GET_FEED);
-  console.log('🚀 ~ App ~ data:', data, error, loading);
+  // const {loading, error, data} = useQuery(GET_FEED);
+  // console.log('🚀 ~ App ~ data:', data, error, loading);
   return (
     <TouchableOpacity
       style={styles.loginButton}
