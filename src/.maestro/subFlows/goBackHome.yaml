@@ -1,0 +1,5 @@
+appId: org.reactjs.native.example.ReactNativeJest
+---
+## go back to home screen
+- tapOn:
+    id: ${output.screens.navigation.goBackHomeButtonTestID}

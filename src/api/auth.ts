@@ -18,6 +18,7 @@ const loginWithEmail = async (user: any) => {
         password: user?.password,
       },
     );
+    Alert.alert('Login Success');
     return response?.data;
     // Alert.alert('Login successful', JSON.stringify(response.data?.users));
   } catch (error) {

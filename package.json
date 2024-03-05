@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "codegen": "graphql-codegen-esm --config codegen.ts"
+    "codegen": "graphql-codegen-esm --config codegen.ts",
+    "test:e2e": "maestro test src/.maestro/flow.yaml"
   },
   "dependencies": {
     "@apollo/client": "^3.9.5",
