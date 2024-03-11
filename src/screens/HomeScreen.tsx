@@ -3,6 +3,7 @@ import React from 'react';
 import {SCREENS} from '../../App';
 import {useNavigation} from '@react-navigation/native';
 import {authorize} from 'react-native-app-auth';
+import Config from 'react-native-config';
 //hungmanh14042001@gmail.com
 const config = {
   serviceConfiguration: {
@@ -49,8 +50,9 @@ const HomeScreen = () => {
           />
         );
       })}
+      
 
-      <Button title="Login Microsft" color={'red'} onPress={loginMicrosoft} />
+      <Button title={Config.APP_NAME} color={'red'} onPress={loginMicrosoft} />
       {/* <Button title="Counter" color={'green'} />
       <Button title="Video" color={'blue'} /> */}
     </SafeAreaView>
