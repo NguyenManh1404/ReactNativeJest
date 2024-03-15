@@ -1,0 +1,83 @@
+appId: com.reactnativejest #bundle id ios and applicationId android
+---
+- launchApp
+# load all output constants saved in the setup file
+- runScript: ./setup.js
+
+# #Testing login
+- tapOn: ${output.screens.home.loginButton}
+- tapOn:
+    id: loginNow
+- tapOn: ${output.screens.login.modalOk}
+- tapOn:
+    id: emailInput
+- inputText: ${output.screens.login.email}
+- tapOn:
+    id: passwordInput
+- inputText: ${output.screens.login.passwordError}
+- tapOn:
+    id: loginNow
+- tapOn: ${output.screens.login.modalOk}
+- tapOn:
+    id: hidenBtn
+- tapOn:
+    id: passwordInput
+- inputText: ${output.screens.login.password}
+- tapOn:
+    id: loginNow
+- tapOn: ${output.screens.login.modalOk}
+- runFlow: ./subFlows/goBackHome.yaml
+
+##Test counter
+
+- tapOn: ${output.screens.home.counter}
+- tapOn:
+    id: incrementPress
+    delay: 500 # (optional) Delay between taps. Default 100ms
+    repeat: 3
+- tapOn:
+    id: incrementPress
+- tapOn:
+    id: incrementPress
+- tapOn:
+    id: incrementPress
+    repeat: 3
+- tapOn:
+    id: decrementPress
+- tapOn:
+    id: decrementPress
+- tapOn:
+    id: decrementPress
+- runFlow: ./subFlows/goBackHome.yaml
+
+# #Test scroll list
+
+- tapOn: ${output.screens.home.list}
+- scrollUntilVisible:
+    element:
+      id: 'item9' # or any other selector
+    direction: DOWN # DOWN|UP|LEFT|RIGHT (optional, default: DOWN)
+    timeout: 50000 # (optional, default: 20000) ms
+    speed: 40 # 0-100 (optional, default: 40) Scroll speed. Higher values scroll faster.
+    visibilityPercentage: 100 # 0-100 (optional, default: 100) Percentage of element visible in viewport
+    centerElement: false # true|false (optional, default: false)
+- tapOn:
+    id: 'item8'
+- tapOn: ${output.screens.list.delete}
+- tapOn: ${output.screens.login.modalOk}
+- runFlow: ./subFlows/goBackHome.yaml
+
+### Test video screen
+
+- tapOn: ${output.screens.home.video}
+- tapOn:
+    id: pauseStart
+- tapOn:
+    id: fullScreen
+- tapOn:
+    id: pauseStart
+- tapOn:
+    id: pauseStart
+- tapOn:
+    id: fullScreen
+- runFlow: ./subFlows/goBackHome.yaml

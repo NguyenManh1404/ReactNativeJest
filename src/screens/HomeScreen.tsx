@@ -2,6 +2,7 @@ import {StyleSheet, SafeAreaView, Button} from 'react-native';
 import React from 'react';
 import {SCREENS} from '../../App';
 import {useNavigation} from '@react-navigation/native';
+import ButtonCustom from '../components/ButtonCustom';
 
 const HomeScreen = () => {
   const {navigate} = useNavigation();
@@ -13,9 +14,8 @@ const HomeScreen = () => {
           return null;
         }
         return (
-          <Button
+          <ButtonCustom
             title={screenName}
-            color={'red'}
             key={index}
             onPress={() => navigate(screenName)}
           />

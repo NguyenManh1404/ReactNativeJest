@@ -24,17 +24,17 @@ curl -Ls "https://get.maestro.mobile.dev" | bash
 
 ```js
 //LoginScreen.js
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
-import AuthTitle from '../components/AuthTitle';
-import CustomTextInput from '../components/CustomTextInput';
-import SocialButton from '../components/SocialButton';
-import {loginWithEmail} from '../api/auth';
-import ButtonCustom from '../components/ButtonCustom';
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import AuthTitle from "../components/AuthTitle";
+import CustomTextInput from "../components/CustomTextInput";
+import SocialButton from "../components/SocialButton";
+import { loginWithEmail } from "../api/auth";
+import ButtonCustom from "../components/ButtonCustom";
 
-const LoginScreen = props => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginScreen = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = () => {
     const data = {
@@ -42,7 +42,7 @@ const LoginScreen = props => {
       password: password,
     };
 
-    const {testLogin} = props;
+    const { testLogin } = props;
 
     if (testLogin) {
       testLogin(data);
@@ -78,7 +78,7 @@ const LoginScreen = props => {
 
       <ButtonCustom
         testID="loginNow"
-        title={'Login Now'}
+        title={"Login Now"}
         onPress={handleLogin}
       />
 
@@ -230,9 +230,9 @@ yarn add @testing-library/react-native
 
 ```javascript
 module.exports = {
-  preset: '@testing-library/react-native',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'], // file type alow for testing
-  setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+  preset: "@testing-library/react-native",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"], // file type alow for testing
+  setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
 };
 ```
 

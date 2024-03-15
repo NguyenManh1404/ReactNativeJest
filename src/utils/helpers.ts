@@ -9,15 +9,7 @@ const checkEvenOdd = (num: number): string => {
     return 'Odd';
   }
 };
-
-//await to show result
-
-const awaitResult = () => {
-  const timer = setTimeout(() => {
-    return 'show result after 5 seconds';
-  }, 5000);
-  return () => clearTimeout(timer);
-};
+//graphql debounce
 
 const debounce = (func: any, wait: any, immediate?: number) => {
   let timeout: any;
@@ -39,4 +31,4 @@ const debounce = (func: any, wait: any, immediate?: number) => {
   return _debounce;
 };
 
-export {multiply, checkEvenOdd, awaitResult, debounce};
+export {multiply, checkEvenOdd, debounce};

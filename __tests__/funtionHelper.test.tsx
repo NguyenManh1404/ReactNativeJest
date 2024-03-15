@@ -1,7 +1,5 @@
-//npx jest helper.test.tsx
-import {multiply, checkEvenOdd, awaitResult} from '../src/utils/helpers';
-
-import {waitFor} from '@testing-library/react-native';
+//npx jest funtionHelper.test.tsx
+import {multiply, checkEvenOdd} from '../src/utils/helpers';
 
 //Multiply function
 describe('multiply tests', () => {
@@ -25,12 +23,4 @@ describe('check odd and even number tests', () => {
   it('-3 is a odd number', () => {
     expect(checkEvenOdd(-3)).toBe('Odd');
   });
-});
-
-//
-jest.useFakeTimers();
-test('show when end 5 seconds', async () => {
-  // Wait for the result using waitFor
-  const result = await waitFor(() => awaitResult());
-  expect(result).toHaveBeenCalledTimes(5).toBe('show result after 5 seconds');
 });

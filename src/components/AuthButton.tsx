@@ -1,8 +1,12 @@
-import {gql, useQuery} from '@apollo/client';
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
-const AuthButton = ({onPress, label, testID}) => {
+interface IAuthButton {
+  onPress: () => void;
+  label: string;
+}
+
+const AuthButton = ({onPress, label}: IAuthButton) => {
   // const GET_FEED = gql`
   //   query getFeed {
   //     feed {
@@ -21,7 +25,7 @@ const AuthButton = ({onPress, label, testID}) => {
     <TouchableOpacity
       style={styles.loginButton}
       onPress={onPress}
-      testID={testID}>
+      testID={'AuthButton'}>
       <Text style={styles.loginButtonText}>{label}</Text>
     </TouchableOpacity>
   );

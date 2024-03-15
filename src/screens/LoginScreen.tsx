@@ -1,13 +1,21 @@
-import {SafeAreaView, StyleSheet, View, Button} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import AuthTitle from '../components/AuthTitle';
 import CustomTextInput from '../components/CustomTextInput';
 import SocialButton from '../components/SocialButton';
 import {loginWithEmail} from '../api/auth';
+import ButtonCustom from '../components/ButtonCustom';
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const handleLogin = () => {
     const data = {
@@ -24,12 +32,16 @@ const LoginScreen = props => {
     loginWithEmail(data);
   };
 
+  const onSecure = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <AuthTitle />
       <View style={styles.inputContainer}>
         <CustomTextInput
-          testID="email"
+          testID="emailInput"
           title="Email"
           placeholder="Enter your email"
           value={email}
@@ -38,20 +50,30 @@ const LoginScreen = props => {
           secureTextEntry={false}
         />
 
-        <CustomTextInput
-          testID="password"
-          title="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={setPassword}
-          keyboardType="default"
-          secureTextEntry={true}
-        />
+        <View>
+          <CustomTextInput
+            testID="passwordInput"
+            title="Password"
+            placeholder="Enter your password"
+            value={password}
+            onChangeText={setPassword}
+            keyboardType="default"
+            secureTextEntry={secureTextEntry}
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.clickHide}
+          onPress={onSecure}
+          testID="hidenBtn">
+          <Text style={styles.textHide}>
+            {secureTextEntry ? 'Hide' : 'See'}
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      <Button
-        style={styles.loginButtonText}
-        title="Login Now"
+      <ButtonCustom
+        testID="loginNow"
+        title={'Login Now'}
         onPress={handleLogin}
       />
 
@@ -60,11 +82,13 @@ const LoginScreen = props => {
           type="twitter"
           label="Twitter"
           link="https://twitter.com/"
+          testID="socialTwitterButton"
         />
         <SocialButton
           type="instagram"
           label="Instagram"
           link="https://www.instagram.com/"
+          testID="socialInstagramButton"
         />
       </View>
     </SafeAreaView>
@@ -84,6 +108,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  clickHide: {
+    position: 'absolute',
+    right: 10,
+    bottom: 20,
+  },
+  textHide: {
+    fontWeight: 'bold',
+    fontSize: 15,
   },
   inputContainer: {
     width: '80%',

@@ -1,27 +1,35 @@
 import React from 'react';
-import {View, Text, StyleSheet, Linking, Image, Platform} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  Linking,
+  Image,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 
 const Icons = {
   twitter: require('../assets/images/twitter.png'),
   instagram: require('../assets/images/instagram.png'),
 };
 
-const SocialButton = ({type, link, label}) => {
+const SocialButton = ({type, link, label, testID}: any) => {
   const onSocialLinkPress = () => {
     Linking.openURL(link);
   };
   return (
-    <View style={styles.social}>
+    <TouchableOpacity
+      style={styles.social}
+      testID={testID}
+      onPress={onSocialLinkPress}>
       <Image
         source={Icons[type]}
         style={styles.icon}
         accessibilityRole="image"
       />
 
-      <Text onPress={onSocialLinkPress} style={styles.label}>
-        {label}
-      </Text>
-    </View>
+      <Text style={styles.label}>{label}</Text>
+    </TouchableOpacity>
   );
 };
 

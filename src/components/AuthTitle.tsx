@@ -6,7 +6,7 @@ const AuthTitle = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTitle('Please Login now !');
+      setTitle('Please Login Now !');
     }, 3000);
     return () => clearTimeout(timer);
   }, []);

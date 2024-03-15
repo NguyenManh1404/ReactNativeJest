@@ -1,5 +1,4 @@
 import {Alert} from 'react-native';
-
 import axios from 'axios';
 
 const fetchPost = async (id: number) => {
@@ -18,11 +17,13 @@ const loginWithEmail = async (user: any) => {
         password: user?.password,
       },
     );
-    Alert.alert('Login Success');
+    Alert.alert(
+      response?.data.errors?.message || response?.data?.data?.message,
+    );
     return response?.data;
-    // Alert.alert('Login successful', JSON.stringify(response.data?.users));
   } catch (error) {
     Alert.alert('Login Failed', 'Please check your email and password.');
+    return error;
   }
 };
 

@@ -1,20 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useCount} from '../hooks/useCount';
 
 const CounterScreen = () => {
-  const [count, setCount] = useState<number>(0);
-  const increment = () => setCount(c => c + 1);
-  const decrement = () => setCount(c => c - 1);
+  const {count, increment, decrement} = useCount();
 
   return (
     <View style={styles.body}>
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Current count: {count}</Text>
-        <Pressable style={styles.button} onPress={decrement}>
+        <Pressable
+          testID="decrementPress"
+          style={styles.button}
+          onPress={decrement}>
           <Text>Decrement</Text>
         </Pressable>
-        <Pressable style={styles.button} onPress={increment}>
+        <Pressable
+          testID="incrementPress"
+          style={styles.button}
+          onPress={increment}>
           <Text>Increment</Text>
         </Pressable>
       </View>
