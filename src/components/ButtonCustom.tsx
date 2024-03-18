@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
 
 interface IButtonCustom {
   title: string;
@@ -10,7 +10,9 @@ interface IButtonCustom {
 const ButtonCustom = ({title, onPress, testID}: IButtonCustom) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress} testID={testID}>
-      <Text style={styles.buttonText}>{title}</Text>
+      <View>
+        <Text style={styles.buttonText}>{title}</Text>
+      </View>
     </TouchableOpacity>
   );
 };

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Video from 'react-native-video';
+import Animated, {FadeInDown} from 'react-native-reanimated';
 
 const SOME_VIDEO =
   'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
@@ -22,7 +23,7 @@ const VideoScreen = () => {
 
   return (
     <SafeAreaView style={styles.body}>
-      <>
+      <Animated.View entering={FadeInDown.delay(100)}>
         <Video
           accessibilityLabel={'video-player'}
           source={{uri: SOME_VIDEO}}
@@ -31,7 +32,7 @@ const VideoScreen = () => {
           paused={!isPlaying}
           //   fullscreen={isFullScreen}
         />
-      </>
+      </Animated.View>
 
       <View style={styles.sectionContainer}>
         <TouchableOpacity
