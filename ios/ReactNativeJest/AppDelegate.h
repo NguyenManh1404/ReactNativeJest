@@ -1,7 +1,7 @@
 #import <RCTAppDelegate.h>
 #import <UIKit/UIKit.h>
 #import <React/RCTLinkingManager.h>
-#import "RNAppAuthAuthorizationFlowManager.h"
+#import <RNAppAuthAuthorizationFlowManager.h>
 
 @interface AppDelegate : RCTAppDelegate <RNAppAuthAuthorizationFlowManager>
 

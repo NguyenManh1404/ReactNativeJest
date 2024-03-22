@@ -1,8 +1,12 @@
 import {StyleSheet, SafeAreaView, Button, Platform} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SCREENS} from '../../App';
 import {useNavigation} from '@react-navigation/native';
 import {authorize} from 'react-native-app-auth';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import Config from 'react-native-config';
 //hungmanh14042001@gmail.com
 const config = {
@@ -21,6 +25,46 @@ const config = {
 
 const HomeScreen = () => {
   const {navigate} = useNavigation();
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: Platform.select({
+        android: 'msauth://com.reactnativejest/ZyQno6t2zOJ8MS2zyGfIqWrqAxs%3D',
+        ios: Config.GOOGLE_CLIENT_ID_IOS,
+      }),
+      iosClientId: Config.GOOGLE_CLIENT_ID_IOS, // ios/MealMaster/GoogleService-info.plist
+      offlineAccess: true,
+      forceCodeForRefreshToken: true,
+      //profileImageSize: 150,
+    });
+  }, []);
+
+  console.log(Config.GOOGLE_CLIENT_ID_IOS);
+
+  const loginGoogle = async () => {
+    try {
+      GoogleSignin.revokeAccess();
+      GoogleSignin.signOut();
+      await GoogleSignin.hasPlayServices();
+      const googleUserInfo = await GoogleSignin.signIn();
+
+      console.log('🚀 ~ loginGoogle ~ googleUserInfo:', googleUserInfo);
+    } catch (error) {
+      console.log('🚀 ~ loginGoogle ~ error:', error);
+      switch (error.code) {
+        case statusCodes.SIGN_IN_CANCELLED:
+          break;
+        case statusCodes.IN_PROGRESS:
+          break;
+        case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+          break;
+        case statusCodes.SIGN_IN_REQUIRED:
+          break;
+        default:
+          break;
+      }
+    }
+  };
 
   const loginMicrosoft = async () => {
     try {
@@ -50,9 +94,13 @@ const HomeScreen = () => {
           />
         );
       })}
-      
 
-      <Button title={Config.APP_NAME} color={'red'} onPress={loginMicrosoft} />
+      <Button
+        title={'Login With Microsoft'}
+        color={'red'}
+        onPress={loginMicrosoft}
+      />
+      <Button title={'Login With Google'} color={'red'} onPress={loginGoogle} />
       {/* <Button title="Counter" color={'green'} />
       <Button title="Video" color={'blue'} /> */}
     </SafeAreaView>

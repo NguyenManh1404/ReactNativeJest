@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import <RNGoogleSignin/RNGoogleSignin.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -18,6 +19,7 @@
             openURL: (NSURL *)url
              options: (NSDictionary<UIApplicationOpenURLOptionsKey, id> *) options
  {
+   [RNGoogleSignin application:application openURL:url options:options];
    if ([self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:url]) {
      return YES;
   }

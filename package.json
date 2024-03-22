@@ -17,6 +17,7 @@
   "dependencies": {
     "@apollo/client": "^3.9.5",
     "@graphql-codegen/cli": "^5.0.2",
+    "@react-native-google-signin/google-signin": "^11.0.0",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/stack": "^6.3.25",
     "@testing-library/jest-native": "^5.4.3",
