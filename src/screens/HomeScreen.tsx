@@ -28,10 +28,8 @@ const HomeScreen = () => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: Platform.select({
-        android: 'msauth://com.reactnativejest/ZyQno6t2zOJ8MS2zyGfIqWrqAxs%3D',
-        ios: Config.GOOGLE_CLIENT_ID_IOS,
-      }),
+      webClientId:
+        '164295958787-1l4ui95m65cv7ht977nqsadlii7ocfc3.apps.googleusercontent.com',
       iosClientId: Config.GOOGLE_CLIENT_ID_IOS, // ios/MealMaster/GoogleService-info.plist
       offlineAccess: true,
       forceCodeForRefreshToken: true,
@@ -39,7 +37,7 @@ const HomeScreen = () => {
     });
   }, []);
 
-  console.log(Config.GOOGLE_CLIENT_ID_IOS);
+  console.log(Config.GOOGLE_CLIENT_ID_ANDROID);
 
   const loginGoogle = async () => {
     try {
@@ -47,6 +45,7 @@ const HomeScreen = () => {
       GoogleSignin.signOut();
       await GoogleSignin.hasPlayServices();
       const googleUserInfo = await GoogleSignin.signIn();
+      GoogleSignin.signInSilently();
 
       console.log('🚀 ~ loginGoogle ~ googleUserInfo:', googleUserInfo);
     } catch (error) {

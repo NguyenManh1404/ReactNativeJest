@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "164295958787",
+    "project_id": "reactnativejest",
+    "storage_bucket": "reactnativejest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164295958787:android:c5b0813f13db5059298936",
+        "android_client_info": {
+          "package_name": "com.reactnativejest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164295958787-1l4ui95m65cv7ht977nqsadlii7ocfc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADr68yvPhwJQ530f4AqDYw4yoqjRE6suc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164295958787-1l4ui95m65cv7ht977nqsadlii7ocfc3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "164295958787-vq7svttv0hhupk4bqibt1592s76jsu7m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reactnativejest"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
