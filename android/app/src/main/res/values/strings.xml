@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ReactNativeJest</string>
+    <string name="facebook_app_id">969714631245027</string>
+    <string name="facebook_client_token">24bc7dd5293113b9257a5353eb6658fc</string>
 </resources>
