@@ -20,16 +20,31 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>FacebookAppID</key>
+	<string>969714631245027</string>
+	<key>FacebookClientToken</key>
+	<string>24bc7dd5293113b9257a5353eb6658fc</string>
+	<key>FacebookDisplayName</key>
+	<string>reactnativejest</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-	<dict>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>rmsauth.com.reactnativejest</string>
-		</array>
-	</dict>
-	<dict>
-		<key>CFBundleTypeRole</key>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>rmsauth.com.reactnativejest</string>
+			</array>
+		</dict>
+
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb969714631245027</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>

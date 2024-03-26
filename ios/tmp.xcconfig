@@ -2,6 +2,7 @@ APP_NAME=React Native Jest Dev
 BASE_URL=http:/$()/demo
 GOOGLE_REVERSED_CLIENT_ID=com.googleusercontent.apps.164295958787-vq7svttv0hhupk4bqibt1592s76jsu7m
 GOOGLE_CLIENT_ID_IOS=164295958787-vq7svttv0hhupk4bqibt1592s76jsu7m.apps.googleusercontent.com
+GOOGLE_CLIENT_ID_ANDROID=164295958787-q2o1dj75lovcd57o578ucnc7ef8cm39f.apps.googleusercontent.com
 ANDROID_STORE_FILE=my-release-key.keystore
 ANDROID_STORE_PASSWORD=enouvo
 ANDROID_KEY_ALIAS=mtkkey

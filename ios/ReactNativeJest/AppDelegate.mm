@@ -1,5 +1,9 @@
 #import "AppDelegate.h"
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import <AuthenticationServices/AuthenticationServices.h> // <- Add This Import
+#import <SafariServices/SafariServices.h> // <- Add This Import
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h> // <- Add This Import
+#import <React/RCTLinkingManager.h> // <- Add This Import
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -11,6 +15,7 @@
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
+  [FBSDKApplicationDelegate.sharedInstance initializeSDK];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -19,6 +24,11 @@
             openURL: (NSURL *)url
              options: (NSDictionary<UIApplicationOpenURLOptionsKey, id> *) options
  {
+
+    if ([[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options]) {
+    return YES;
+  }
+
    [RNGoogleSignin application:application openURL:url options:options];
    if ([self.authorizationFlowManagerDelegate resumeExternalUserAgentFlowWithURL:url]) {
      return YES;

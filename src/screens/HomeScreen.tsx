@@ -7,6 +7,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {AccessToken, LoginManager, Profile} from 'react-native-fbsdk-next';
 import Config from 'react-native-config';
 //hungmanh14042001@gmail.com
 const config = {
@@ -65,6 +66,29 @@ const HomeScreen = () => {
     }
   };
 
+  const loginFacebook = async () => {
+    console.log('vao day');
+    try {
+      LoginManager.logOut();
+
+      const result = await LoginManager.logInWithPermissions([
+        'public_profile',
+      ]);
+      if (result) {
+        if (result.isCancelled) {
+        } else {
+          const tokenResponse = await AccessToken.getCurrentAccessToken();
+          if (tokenResponse) {
+            Profile.getCurrentProfile().then(function (currentProfile) {
+              console.log('🚀 ~ currentProfile:', currentProfile);
+            });
+          }
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ loginFacebook ~ error:', error);
+    }
+  };
   const loginMicrosoft = async () => {
     try {
       // console.log("vao day")
@@ -100,6 +124,12 @@ const HomeScreen = () => {
         onPress={loginMicrosoft}
       />
       <Button title={'Login With Google'} color={'red'} onPress={loginGoogle} />
+
+      <Button
+        title={'Login With Facebook'}
+        color={'red'}
+        onPress={loginFacebook}
+      />
       {/* <Button title="Counter" color={'green'} />
       <Button title="Video" color={'blue'} /> */}
     </SafeAreaView>
